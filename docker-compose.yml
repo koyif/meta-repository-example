@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  # main infrastructure services
+  config-service:
+    image: config-service
+    build: config-service
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: "docker,native"
+      CONFIG_SERVICE_PASS: "${CONFIG_SERVICE_PASS}"
+      CONFIG_SERVICE_USER: "${CONFIG_SERVICE_USER}"
