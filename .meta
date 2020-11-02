@@ -1,0 +1,5 @@
+{
+  "projects": {
+    "config-service": "git@github.com:koyif/meta-repository-example-config-service.git"
+  }
+}
