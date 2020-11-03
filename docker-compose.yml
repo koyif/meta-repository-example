@@ -13,10 +13,22 @@ services:
   registry-service:
     restart: unless-stopped
     image: consul:1.4.4
-    ports:
-    - 8500:8500
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8500/v1/status/leader" ]
       interval: 30s
       timeout: 20s
       retries: 3
+  gateway-service:
+    image: gateway-service
+    build: gateway-service
+    restart: unless-stopped
+    depends_on:
+    - config-service
+    - registry-service
+    environment:
+      CONSUL_PREFER_IP: "${CONSUL_PREFER_IP}"
+      CONSUL_HOST: "${CONSUL_HOST}"
+      CONSUL_PORT: "${CONSUL_PORT}"
+      SPRING_PROFILES_ACTIVE: "docker,native"
+      CONFIG_SERVICE_PASS: "${CONFIG_SERVICE_PASS}"
+      CONFIG_SERVICE_USER: "${CONFIG_SERVICE_USER}"
