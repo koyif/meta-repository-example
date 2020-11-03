@@ -1,5 +1,6 @@
 {
   "projects": {
-    "config-service": "git@github.com:koyif/meta-repository-example-config-service.git"
+    "config-service": "git@github.com:koyif/meta-repository-example-config-service.git",
+    "gateway-service": "git@github.com:koyif/meta-repository-example-gateway-service.git"
   }
 }

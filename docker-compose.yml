@@ -10,3 +10,13 @@ services:
       SPRING_PROFILES_ACTIVE: "docker,native"
       CONFIG_SERVICE_PASS: "${CONFIG_SERVICE_PASS}"
       CONFIG_SERVICE_USER: "${CONFIG_SERVICE_USER}"
+  registry-service:
+    restart: unless-stopped
+    image: consul:1.4.4
+    ports:
+    - 8500:8500
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8500/v1/status/leader" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
